@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gifun/domain/model/user.dart';
 import 'package:gifun/domain/repository/user_repository.dart';
 import 'package:gifun/data/repository/user_repository_impl.dart';
 
@@ -10,7 +9,7 @@ class MyScreen extends StatefulWidget {
 
 class MyScreenState extends State<MyScreen> {
   UserRepository _userRepository;
-  User _currentUser = new User(0, 'nickName', 'avatarImage', 'coverImage');
+  //User _currentUser = new User(0, 'nickName', 'avatarImage', 'coverImage');
 
   @override
   void initState() {

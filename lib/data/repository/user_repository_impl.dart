@@ -2,9 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:gifun/domain/model/user.dart';
 import 'package:gifun/domain/repository/user_repository.dart';
-import 'package:gifun/data/constants.dart';
-import 'package:gifun/data/entities/user_entity.dart';
-import 'package:gifun/data/converter/user_entity_to_user.dart';
 import 'package:gifun/data/exception/service_exception.dart';
 import 'package:gifun/data/exception/user_not_found.dart';
 import 'package:gifun/data/entities/result.dart';
@@ -13,14 +10,13 @@ import 'package:http/http.dart' as http;
 class UserRepositoryImpl implements UserRepository {
   @override
   Future<User> getUser(num userId) async {
-    String url = GetUserUrl(userId);
+    String url = 'https://easy-mock.com/mock/5b2c6900a46a453e3ea66330/gifun/user/$userId';
     try {
       http.Response response = await http.get(url);
       if (200 == response.statusCode) {
         Result result = Result.fromJson(json.decode(response.body));
         if (0 == result.error) {
-          UserEntity user = UserEntity.fromJson(result.data);
-          return Future.value(UserEntity2User(user));
+          return Future.value(null);
         }
 
         if (-1 == result.error) {
