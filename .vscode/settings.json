@@ -1,0 +1,25 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "workbench.colorTheme": "One Dark Pro",
+    "window.zoomLevel": 1,
+    "editor.fontFamily": "Courier, monospace",
+    "editor.fontSize": 13,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 300,
+    // 针对 [dart] 语言，配置替代编辑器设置。
+    "[dart]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
+    // 针对 [yaml] 语言，配置替代编辑器设置。
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": false
+    }
+}
