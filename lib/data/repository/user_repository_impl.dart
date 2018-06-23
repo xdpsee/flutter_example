@@ -5,11 +5,12 @@ import 'package:built_value/serializer.dart';
 import 'package:gifun/domain/model/user.dart';
 import 'package:gifun/domain/repository/user_repository.dart';
 import 'package:gifun/data/exception/service_exception.dart';
-import 'package:gifun/data/serializer/serializers.dart';
-import 'package:built_value/standard_json_plugin.dart';
-import 'package:gifun/data/datasource/response/get_user_response.dart';
+import 'package:gifun/data/exception/unknown_exception.dart';
+import 'package:gifun/data/datasource/response/response.dart';
+import 'package:gifun/data/entities/user_entity.dart';
 import 'package:gifun/data/converter/user_entity_to_user.dart';
 import 'package:gifun/data/exception/user_not_found.dart';
+import 'package:gifun/data/serializer/serializers.dart';
 
 class UserRepositoryImpl implements UserRepository {
   @override
@@ -20,20 +21,29 @@ class UserRepositoryImpl implements UserRepository {
       http.Response response = await http.get(url);
       if (200 == response.statusCode) {
         Map<String, dynamic> jsonObj = json.decode(response.body);
-        GetUserResponse result = serializers.deserializeWith(GetUserResponse.serializer,
-            jsonObj);
+        Response<UserEntity> result = parse(jsonObj);
         if (0 == result.error) {
           return Future.value(UserEntity2User(result.data));
-        }
-
-        if (-1 == result.error) {
-          throw new UserNotFoundException();
+        } else if (-1 == result.error) {
+          return Future.error(new UserNotFoundException());
         }
       }
     } on Exception catch (e) {
       print(e);
+      return Future.error(new ServiceException('服务不可用'));
     }
+    
+    return Future.error(new UnknownException());
+  }
 
-    throw new ServiceException('服务不可用');
+  Response<UserEntity> parse(Map<String, dynamic> json) {
+    const FullType type =
+        const FullType(Response, const [const FullType(UserEntity)]);
+    final serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(type, () => new ResponseBuilder<UserEntity>()))
+        .build();
+    Response<UserEntity> result =
+        serializersWithBuilder.deserialize(json, specifiedType: type);
+    return result;
   }
 }

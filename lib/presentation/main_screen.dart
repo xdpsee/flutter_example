@@ -3,7 +3,7 @@ import 'package:gifun/presentation/home_screen.dart';
 import 'package:gifun/presentation/popular_screen.dart';
 import 'package:gifun/presentation/favorites_screen.dart';
 import 'package:gifun/presentation/my_screen.dart';
-import 'package:gifun/presentation/loading_container.dart';
+import 'package:gifun/presentation/loading_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     if (-1 == _currIndex) {
-      return new LoadingContainer();
+      return new LoadingScreen();
     }
 
     final BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(
@@ -68,7 +68,7 @@ class MainScreenState extends State<MainScreen> {
         });
       },
     );
-
+    
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Gifun'),

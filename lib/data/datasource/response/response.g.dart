@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of get_user_response;
+part of response;
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -14,19 +14,23 @@ part of get_user_response;
 // ignore_for_file: prefer_expression_function_bodies
 // ignore_for_file: sort_constructors_first
 
-Serializer<GetUserResponse> _$getUserResponseSerializer =
-    new _$GetUserResponseSerializer();
+Serializer<Response> _$responseSerializer = new _$ResponseSerializer();
 
-class _$GetUserResponseSerializer
-    implements StructuredSerializer<GetUserResponse> {
+class _$ResponseSerializer implements StructuredSerializer<Response> {
   @override
-  final Iterable<Type> types = const [GetUserResponse, _$GetUserResponse];
+  final Iterable<Type> types = const [Response, _$Response];
   @override
-  final String wireName = 'GetUserResponse';
+  final String wireName = 'Response';
 
   @override
-  Iterable serialize(Serializers serializers, GetUserResponse object,
+  Iterable serialize(Serializers serializers, Response object,
       {FullType specifiedType: FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
     final result = <Object>[
       'error',
       serializers.serialize(object.error, specifiedType: const FullType(int)),
@@ -34,17 +38,24 @@ class _$GetUserResponseSerializer
       serializers.serialize(object.message,
           specifiedType: const FullType(String)),
       'data',
-      serializers.serialize(object.data,
-          specifiedType: const FullType(UserEntity)),
+      serializers.serialize(object.data, specifiedType: parameterT),
     ];
 
     return result;
   }
 
   @override
-  GetUserResponse deserialize(Serializers serializers, Iterable serialized,
+  Response deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = new GetUserResponseBuilder();
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new ResponseBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as ResponseBuilder;
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -61,8 +72,8 @@ class _$GetUserResponseSerializer
               specifiedType: const FullType(String)) as String;
           break;
         case 'data':
-          result.data.replace(serializers.deserialize(value,
-              specifiedType: const FullType(UserEntity)) as UserEntity);
+          result.data =
+              serializers.deserialize(value, specifiedType: parameterT);
           break;
       }
     }
@@ -71,38 +82,36 @@ class _$GetUserResponseSerializer
   }
 }
 
-class _$GetUserResponse extends GetUserResponse {
+class _$Response<T> extends Response<T> {
   @override
   final int error;
   @override
   final String message;
   @override
-  final UserEntity data;
+  final T data;
 
-  factory _$GetUserResponse([void updates(GetUserResponseBuilder b)]) =>
-      (new GetUserResponseBuilder()..update(updates)).build();
+  factory _$Response([void updates(ResponseBuilder<T> b)]) =>
+      (new ResponseBuilder<T>()..update(updates)).build();
 
-  _$GetUserResponse._({this.error, this.message, this.data}) : super._() {
-    if (error == null)
-      throw new BuiltValueNullFieldError('GetUserResponse', 'error');
+  _$Response._({this.error, this.message, this.data}) : super._() {
+    if (error == null) throw new BuiltValueNullFieldError('Response', 'error');
     if (message == null)
-      throw new BuiltValueNullFieldError('GetUserResponse', 'message');
-    if (data == null)
-      throw new BuiltValueNullFieldError('GetUserResponse', 'data');
+      throw new BuiltValueNullFieldError('Response', 'message');
+    if (data == null) throw new BuiltValueNullFieldError('Response', 'data');
+    if (T == dynamic) throw new BuiltValueMissingGenericsError('Response', 'T');
   }
 
   @override
-  GetUserResponse rebuild(void updates(GetUserResponseBuilder b)) =>
+  Response<T> rebuild(void updates(ResponseBuilder<T> b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GetUserResponseBuilder toBuilder() =>
-      new GetUserResponseBuilder()..replace(this);
+  ResponseBuilder<T> toBuilder() => new ResponseBuilder<T>()..replace(this);
 
   @override
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    if (other is! GetUserResponse) return false;
+    if (other is! Response) return false;
     return error == other.error &&
         message == other.message &&
         data == other.data;
@@ -116,7 +125,7 @@ class _$GetUserResponse extends GetUserResponse {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GetUserResponse')
+    return (newBuiltValueToStringHelper('Response')
           ..add('error', error)
           ..add('message', message)
           ..add('data', data))
@@ -124,9 +133,8 @@ class _$GetUserResponse extends GetUserResponse {
   }
 }
 
-class GetUserResponseBuilder
-    implements Builder<GetUserResponse, GetUserResponseBuilder> {
-  _$GetUserResponse _$v;
+class ResponseBuilder<T> implements Builder<Response<T>, ResponseBuilder<T>> {
+  _$Response<T> _$v;
 
   int _error;
   int get error => _$this._error;
@@ -136,51 +144,37 @@ class GetUserResponseBuilder
   String get message => _$this._message;
   set message(String message) => _$this._message = message;
 
-  UserEntityBuilder _data;
-  UserEntityBuilder get data => _$this._data ??= new UserEntityBuilder();
-  set data(UserEntityBuilder data) => _$this._data = data;
+  T _data;
+  T get data => _$this._data;
+  set data(T data) => _$this._data = data;
 
-  GetUserResponseBuilder();
+  ResponseBuilder();
 
-  GetUserResponseBuilder get _$this {
+  ResponseBuilder<T> get _$this {
     if (_$v != null) {
       _error = _$v.error;
       _message = _$v.message;
-      _data = _$v.data?.toBuilder();
+      _data = _$v.data;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(GetUserResponse other) {
+  void replace(Response<T> other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other as _$GetUserResponse;
+    _$v = other as _$Response<T>;
   }
 
   @override
-  void update(void updates(GetUserResponseBuilder b)) {
+  void update(void updates(ResponseBuilder<T> b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GetUserResponse build() {
-    _$GetUserResponse _$result;
-    try {
-      _$result = _$v ??
-          new _$GetUserResponse._(
-              error: error, message: message, data: data.build());
-    } catch (_) {
-      String _$failedField;
-      try {
-        _$failedField = 'data';
-        data.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'GetUserResponse', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+  _$Response<T> build() {
+    final _$result =
+        _$v ?? new _$Response<T>._(error: error, message: message, data: data);
     replace(_$result);
     return _$result;
   }

@@ -15,6 +15,6 @@ part of serializers;
 // ignore_for_file: sort_constructors_first
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(GetUserResponse.serializer)
+      ..add(Response.serializer)
       ..add(UserEntity.serializer))
     .build();
