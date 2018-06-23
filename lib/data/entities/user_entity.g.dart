@@ -14,6 +14,68 @@ part of ueser_entity;
 // ignore_for_file: prefer_expression_function_bodies
 // ignore_for_file: sort_constructors_first
 
+Serializer<UserEntity> _$userEntitySerializer = new _$UserEntitySerializer();
+
+class _$UserEntitySerializer implements StructuredSerializer<UserEntity> {
+  @override
+  final Iterable<Type> types = const [UserEntity, _$UserEntity];
+  @override
+  final String wireName = 'UserEntity';
+
+  @override
+  Iterable serialize(Serializers serializers, UserEntity object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.userId, specifiedType: const FullType(num)),
+      'nick_name',
+      serializers.serialize(object.nickName,
+          specifiedType: const FullType(String)),
+      'avatar_image',
+      serializers.serialize(object.avatarImage,
+          specifiedType: const FullType(String)),
+      'cover_image',
+      serializers.serialize(object.coverImage,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  UserEntity deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new UserEntityBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.userId = serializers.deserialize(value,
+              specifiedType: const FullType(num)) as num;
+          break;
+        case 'nick_name':
+          result.nickName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'avatar_image':
+          result.avatarImage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'cover_image':
+          result.coverImage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$UserEntity extends UserEntity {
   @override
   final num userId;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gifun/domain/repository/user_repository.dart';
 import 'package:gifun/data/repository/user_repository_impl.dart';
+import 'package:gifun/data/exception/service_exception.dart';
+import 'package:gifun/data/exception/user_not_found.dart';
 
 class MyScreen extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class MyScreen extends StatefulWidget {
 
 class MyScreenState extends State<MyScreen> {
   UserRepository _userRepository;
+  String _error = '';
   //User _currentUser = new User(0, 'nickName', 'avatarImage', 'coverImage');
 
   @override
@@ -16,10 +19,14 @@ class MyScreenState extends State<MyScreen> {
     super.initState();
     _userRepository = new UserRepositoryImpl();
 
-    _userRepository.getUser(1).then((user) {
-       
-    }).catchError((e) {
-
+    _userRepository.getUser(1).then((user) {}).catchError((e) {
+      setState(() {
+        if (e is UserNotFoundException) {
+          _error = '用户不存在';
+        } else {
+            _error = '服务不可用';
+        }
+      });
     });
   }
 
@@ -39,8 +46,8 @@ class MyScreenState extends State<MyScreen> {
                 color: Colors.pink,
               ),
               new Text(
-                "My Tab",
-                style: new TextStyle(color: Colors.white),
+                _error,
+                style: new TextStyle(color: Colors.red),
               )
             ],
           ),
