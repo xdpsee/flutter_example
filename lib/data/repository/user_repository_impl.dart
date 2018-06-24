@@ -8,7 +8,7 @@ import 'package:gifun/data/exception/service_exception.dart';
 import 'package:gifun/data/exception/unknown_exception.dart';
 import 'package:gifun/data/datasource/response/response.dart';
 import 'package:gifun/data/entities/user_entity.dart';
-import 'package:gifun/data/converter/user_entity_to_user.dart';
+import 'package:gifun/data/converter/converts.dart';
 import 'package:gifun/data/exception/user_not_found.dart';
 import 'package:gifun/data/serializer/serializers.dart';
 

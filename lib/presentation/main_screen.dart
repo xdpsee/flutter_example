@@ -15,11 +15,11 @@ class MainScreenState extends State<MainScreen> {
   List<BottomNavigationBarItem> _navigationItems = <BottomNavigationBarItem>[
     new BottomNavigationBarItem(icon: new Icon(Icons.home), title: Text('首页')),
     new BottomNavigationBarItem(
-        icon: new Icon(Icons.hot_tub), title: Text('热门')),
+        icon: new Icon(Icons.video_library), title: Text('视频')),
     new BottomNavigationBarItem(
         icon: new Icon(Icons.favorite), title: Text('收藏')),
     new BottomNavigationBarItem(
-        icon: new Icon(Icons.account_box), title: Text('My'))
+        icon: new Icon(Icons.account_circle), title: Text('我的'))
   ];
 
   List<Widget> _pages = <Widget>[
@@ -68,12 +68,8 @@ class MainScreenState extends State<MainScreen> {
         });
       },
     );
-    
+
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Gifun'),
-        centerTitle: true,
-      ),
       body: new IndexedStack(
         index: _currIndex,
         children: _pages,

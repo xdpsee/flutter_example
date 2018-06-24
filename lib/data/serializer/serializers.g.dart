@@ -15,6 +15,16 @@ part of serializers;
 // ignore_for_file: sort_constructors_first
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(ContentEntity.serializer)
+      ..add(ContentType.serializer)
+      ..add(PostEntity.serializer)
       ..add(Response.serializer)
-      ..add(UserEntity.serializer))
+      ..add(TagEntity.serializer)
+      ..add(UserEntity.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(ContentEntity)]),
+          () => new ListBuilder<ContentEntity>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(TagEntity)]),
+          () => new ListBuilder<TagEntity>()))
     .build();
