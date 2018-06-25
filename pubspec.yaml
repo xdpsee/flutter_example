@@ -13,6 +13,7 @@ dependencies:
     built_collection: '>=2.0.0 <4.0.0'
     cached_network_image: "^0.4.1"
     pull_to_refresh: ^1.1.4
+    video_player: "^0.6.1"
 
 dev_dependencies:
     build_runner: ^0.8.0

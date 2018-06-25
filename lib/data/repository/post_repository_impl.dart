@@ -7,7 +7,6 @@ import 'package:gifun/data/exception/service_exception.dart';
 import 'package:gifun/data/exception/unknown_exception.dart';
 import 'package:gifun/data/datasource/response/response.dart';
 import 'package:gifun/data/converter/converts.dart';
-import 'package:gifun/common/enums.dart';
 import 'package:gifun/data/entities/post_entity.dart';
 import 'package:gifun/data/serializer/serializers.dart';
 import 'package:gifun/domain/model/post.dart';
